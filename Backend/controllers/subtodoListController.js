@@ -2,17 +2,19 @@ const SubtoodoList = require('../models/subtodoListModel');
 
 exports.CreateSubList = async(req,res,next)=>{
     try{
+        const todoListid = req.params.todoListid;
+
         const {listName} = req.body;
         if(!listName){
-            return res.status(400).json({message:'ListName is required'})
+            return res.status(400).json({message:'Listname is required'})
         }
 
-        const existinglistName = await SubtoodoList.findOne({listName})
-        if(existinglistName){
+        const existinglist = await SubtoodoList.findOne({listName,todoListId:todoListid})
+        if(existinglist){
             return res.status(400).json({message:'Listname already exist'})
         }
 
-        const sublist = new SubtoodoList({listName});
+        const sublist = new SubtoodoList({listName,todoListId:todoListid});
         await sublist.save();
         res.status(200).json({message:'sublist created',sublist})
 
@@ -24,9 +26,10 @@ exports.CreateSubList = async(req,res,next)=>{
 
 exports.GetSingleSubList = async(req,res,next)=>{
     try{
-        const id = req.params.id;
+        const todoListid = req.params.todoListid;
+        const id = req.params.sublistid;
 
-        const existingSubList = await SubtoodoList.findById(id);
+        const existingSubList = await SubtoodoList.findOne({_id:id,todoListId:todoListid});
         if(!existingSubList){
             return res.status(400).json({message:'SubList does not found'})
         }
@@ -40,8 +43,10 @@ exports.GetSingleSubList = async(req,res,next)=>{
 
 exports.GetAllSubLists = async(req,res,next)=>{
     try{
-        const sublists = await SubtoodoList.find();
-        if(!sublists){
+        const todoListid = req.params.todoListid;
+
+        const sublists = await SubtoodoList.find({todoListId:todoListid});
+        if(sublists.length === 0){
             return res.status(400).json({message:'No sublists found'})
         }
 
@@ -54,9 +59,10 @@ exports.GetAllSubLists = async(req,res,next)=>{
 
 exports.DeleteSubList = async(req,res,next)=>{
     try{
-        const id = req.params.id;
+        const todoListid = req.params.todoListid;
+        const id = req.params.sublistid;
 
-        const subList = await SubtoodoList.findByIdAndDelete(id);
+        const subList = await SubtoodoList.findOneAndDelete({_id:id,todoListId:todoListid});
         if(!subList){
             return res.status(400).json({message:'No subList found'})
         }
@@ -70,10 +76,11 @@ exports.DeleteSubList = async(req,res,next)=>{
 
 exports.UpdateSubList = async(req,res,next)=>{
     try{
-        const id = req.params.id;
-        const data = req.body
+        const todoListid = req.params.todoListid;
+        const id = req.params.sublistid;
+        const data = req.body;
 
-        const subList = await SubtoodoList.findByIdAndUpdate(id,data,{new:true});
+        const subList = await SubtoodoList.findOneAndUpdate({_id:id,todoListId:todoListid},data,{new:true});
         if(!subList){
             return res.status(400).json({message:'subList does not found'})
         }

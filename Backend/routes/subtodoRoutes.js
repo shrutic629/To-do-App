@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const subtodoController = require('../controllers/subtodoListController');
 
-router.post("/createsublist",subtodoController.CreateSubList)
-router.get("/getsinglesublist",subtodoController.GetSingleSubList)
-router.get("/getallsublist",subtodoController.GetAllSubLists)
-router.delete("/deletesublist",subtodoController.DeleteSubList)
-router.patch("/updatesublist",subtodoController.UpdateSubList)
+router.post('/to-doList/:todoListid/createSubList',subtodoController.CreateSubList)
+router.get("/to-doList/:todoListid/getallsublist",subtodoController.GetAllSubLists)
+router.get("/to-doList/:todoListid/getsinglesublist/:sublistid",subtodoController.GetSingleSubList)
+router.delete("/to-doList/:todoListid/deletesublist/:sublistid",subtodoController.DeleteSubList)
+router.patch("/to-doList/:todoListid/updatesublist/:sublistid",subtodoController.UpdateSubList)
 
-module.exports = router
+module.exports = router;    
