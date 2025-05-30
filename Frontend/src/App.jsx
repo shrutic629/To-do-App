@@ -7,6 +7,8 @@ import ConfirmPassword from './components/ConfirmPassword'
 import { Routes,Route } from 'react-router-dom'
 import HeaderSidebar from './components/HeaderSidebar'
 import UpcomingTask from './components/UpcomingTask'
+import ListTask from './components/ListTask'
+import SubListPage from './components/SubListPage'
 
 const App = () => {
   return (
@@ -19,6 +21,8 @@ const App = () => {
       <Route path='/confirm-password' element={<ConfirmPassword/>}/> 
       <Route path='/header-sidebar' element={<HeaderSidebar/>}/> 
       <Route path='/home' element={<UpcomingTask/>}/>
+      <Route path='/list' element={<ListTask/>}/>
+      <Route path='/sub-list' element={<SubListPage/>}/>
     </Routes>
     </div>
   )
