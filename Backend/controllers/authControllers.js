@@ -103,9 +103,6 @@ exports.Login = async(req,res,next)=>{
             return res.status(400).json({message:'User does not exist'})
         }
 
-        // console.log("Password", 123, password, typeof(password))
-        // console.log('existing Pass: ', 456,  existingUser.password, typeof(existingUser.password))
-
         const match = await bcrypt.compare(password, existingUser.password)
         
         if(!match){
@@ -172,7 +169,7 @@ exports.ConfirmPassword = async(req,res,next)=>{
             return res.status(400).json({message:'User does not exist'})
         }
 
-        if(otp !== existingUser.otp){
+        if(String(otp) !== String(existingUser.otp)){
             return res.status(400).json({message:'Wrong otp'})
         }
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 
 const HeaderSidebar = () => {
   return (
@@ -11,10 +12,15 @@ const HeaderSidebar = () => {
                     <h1 className='text-lg pl-3'>Rajdeep</h1>
                 </div>
             </div>
-
-            <div className='w-1/6 border-2 h-[85%]'>
-                <div className='border-2 py-3 pl-9 text-xl'>Home</div>
-                <div className='border-2 py-3 pl-9 text-xl'>Lists</div>
+            
+            <div className='flex h-full'>
+                <div className='w-1/5 border-2 '>
+                    <div className='border-2 py-3 pl-9 text-xl'>Home</div>
+                    <div className='border-2 py-3 pl-9 text-xl'>Lists</div>
+                </div>
+                <div className='w-4/5 border-2 '>
+                    <Outlet/>
+                </div>
             </div>
         </div>   
     </div>

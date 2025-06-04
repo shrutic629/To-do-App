@@ -19,10 +19,17 @@ const App = () => {
       <Route path='/login' element={<Login/>}/>
       <Route path='/forgot-password' element={<ForgotPassword/>}/>
       <Route path='/confirm-password' element={<ConfirmPassword/>}/> 
-      <Route path='/header-sidebar' element={<HeaderSidebar/>}/> 
+      {/* <Route path='/header-sidebar' element={<HeaderSidebar/>}/> 
       <Route path='/home' element={<UpcomingTask/>}/>
       <Route path='/list' element={<ListTask/>}/>
-      <Route path='/sub-list' element={<SubListPage/>}/>
+      <Route path='/sub-list' element={<SubListPage/>}/> */}
+
+      <Route path='/header-sidebar' element={<HeaderSidebar/>}>
+        <Route path='home' element={<UpcomingTask/>}/>
+        <Route path='list' element={<ListTask/>}/>
+        <Route path='sub-list' element={<SubListPage/>}/>
+      </Route>
+       
     </Routes>
     </div>
   )

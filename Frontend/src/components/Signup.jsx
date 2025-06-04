@@ -1,16 +1,33 @@
 import {useState} from 'react'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import axios from 'axios'
+import { useNavigate, Link } from 'react-router-dom';
 
 const Signup = () => {
   const [name,setName] = useState(" ");
   const [email,setEmail] = useState(" ");
   const [password,setPassword] = useState(" ");
 
+  const navigate = useNavigate()
 
-  function SubmitHandler(e){
+
+  async function SubmitHandler(e){
         e.preventDefault()
-        // const response = 
+        try{
+          const response = await axios.post(`http://localhost:3000/api/auth/signup`,
+            {
+              name:name,
+              email:email,
+              password:password
+            }
+          )
+          console.log("response",response.data)
+          navigate('/confirm-otp')
+        }
+        catch(error){
+          console.log(error)
+        }
   }
   
 
@@ -36,7 +53,12 @@ const Signup = () => {
           </div>
         </form>
 
-        <h2 className='mt-5'>Already have an account? <span className='text-blue-700'>login</span></h2>
+        <h2 className='mt-5'>Already have an account? <Link to='/login' className='text-blue-700'>login</Link> </h2>
+
+
+
+        {/* <span className='text-blue-700'>login</span> */}
+        
       </div>
     </div>
   )
