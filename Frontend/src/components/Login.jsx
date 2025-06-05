@@ -37,7 +37,7 @@ const Login = () => {
           </div>
         </div>  
         <div className='mt-6 text-center'>
-          <Link to="">
+          <Link to="/header-sidebar/home">
             <Button variant="contained" type="submit">Login</Button>
           </Link>
         </div>
