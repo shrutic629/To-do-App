@@ -1,5 +1,7 @@
 import {useState,useEffect} from 'react'
 import { ArrowLongRightIcon } from '@heroicons/react/24/solid';
+import { TrashIcon } from '@heroicons/react/24/solid'
+
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
@@ -56,11 +58,18 @@ const ListTask = () => {
     }
   }
 
-  console.log("lists",lists)
+//   console.log("lists",lists)
 
   useEffect(()=>{
     showLists()
   })
+
+  const deleteList = async(id)=>{
+    const response = await axios.delete(`http://localhost:3000/api/todo-list/${id}`)
+    console.log('delete response',response)
+    toast(response.data.message)
+
+  }
   
 
   return (
@@ -105,8 +114,11 @@ const ListTask = () => {
                             </div>
                             <div>
                                 <Link to="/header-sidebar/sub-list">
-                                    <ArrowLongRightIcon className="w-6 h-6 text-black" />
+                                    <ArrowLongRightIcon className="w-6 h-6 text-blue-500" />
                                 </Link>
+                            </div>
+                            <div>
+                            <TrashIcon className="w-6 h-6 text-blue-500" onClick={()=>deleteList(list._id)}/>
                             </div>
                         </div>
                     </div>

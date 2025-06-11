@@ -50,7 +50,7 @@ const Login = () => {
     <div className='bg-gradient-to-r from-emerald-300 to-cyan-300 ... h-screen pt-14'>
     <form onSubmit={submitHandler}>
       <div className='border-2 w-3/12 mx-auto border-slate-400 px-4 py-12 rounded-lg bg-slate-100 mt-14'>
-        <h1 className='text-4xl text-center font-bold text-blue-700 pb-4ss'>Login</h1>
+        <h1 className='text-4xl text-center font-bold text-black pb-4ss'>Login</h1>
         <div className='mt-4'>
           <div className='mt-4'>
           <TextField id="outlined-basic" label="Email" variant="outlined" name="email" value={data.email} className='w-full' onChange={(e)=>{setData({...data,[e.target.name]:e.target.value})}}/>
