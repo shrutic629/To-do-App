@@ -2,9 +2,8 @@ const mongoose = require('mongoose');
 
 const subtodoListModel = new mongoose.Schema({
     listName:{
-        type:String,
+        type:[String],
         required:true,
-        unique:true,
     },
     completed:{
         type:Boolean,
