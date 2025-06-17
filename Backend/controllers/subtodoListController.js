@@ -5,8 +5,8 @@ exports.CreateSubList = async(req,res,next)=>{
         const todoListid = req.params.todoListid;
 
         const {listName} = req.body;
-        if(!listName){
-            return res.status(400).json({message:'Listname is required'})
+        if(!Array.isArray(listName)){
+            return res.status(400).json({message:'Listname is empty array'})
         }
 
         const existinglist = await SubtoodoList.findOne({listName,todoListId:todoListid})

@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config()
 const nodemailer = require('nodemailer')
 const transporter = require('../utility/sendMail')
+const cloudinary = require('../utility/cloudinary')
 
 const generateOtp = ()=>{
     return Math.floor(1000 + Math.random() * 9000)
@@ -13,9 +14,6 @@ const generateOtpExpiry = ()=>{
     return Date.now() + 5 * 60 * 1000
 }
 
-// const otpExpiry = Date.now() + 5 * 60 * 1000
-// console.log((new Date(otpExipry).toLocaleString()))
-
 exports.Signup = async(req,res,next)=>{
     try{
         const {name, email, password } = req.body;
@@ -23,6 +21,16 @@ exports.Signup = async(req,res,next)=>{
         {
             return res.status(400).json({message:'All fields are required'})
         }
+
+        if(!req.files && !req.files.image){
+            return res.status(400).json({message:'No Image file uploaded'})
+        }
+
+        const image = req.files.image;
+
+        const result = await cloudinary.uploader.upload(image.tempFilePath, {
+            folder: 'todo-uploads', 
+          });
 
         const existingUser = await User.findOne({email})
         if(existingUser){
@@ -37,7 +45,7 @@ exports.Signup = async(req,res,next)=>{
         const otp = generateOtp();
         const otpExpiry = generateOtpExpiry();
 
-        const user = new User({name,email,password:hash,otp:otp,otpExpiry:otpExpiry});
+        const user = new User({name,email,password:hash,otp:otp,otpExpiry:otpExpiry,image:result.secure_url});
         await user.save();
         res.status(200).json({user,message:`User created successfully! and your otp is ${otp}`})
 

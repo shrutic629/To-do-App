@@ -27,7 +27,7 @@ const App = () => {
       <Route path='/header-sidebar' element={<HeaderSidebar/>}>
         <Route path='home' element={<UpcomingTask/>}/>
         <Route path='list' element={<ListTask/>}/>
-        <Route path='sub-list' element={<SubListPage/>}/>
+        <Route path='sub-list/:todoListid' element={<SubListPage/>}/>
       </Route>
        
     </Routes>

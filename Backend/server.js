@@ -5,6 +5,7 @@ require('dotenv').config();
 const connectDB = require('./config/db')
 const errorHandler = require('./middleware/errorHandler')
 const cors = require('cors')
+const fileUpload = require('express-fileupload')
 
 const PORT = process.env.PORT
 
@@ -15,6 +16,11 @@ app.use(cors({
     origin:'http://localhost:5173',
     credentials:true,
 }))
+
+app.use(fileUpload({
+    useTempFiles : true,
+    tempFileDir : '/tmp/'
+}));
 
 const authRoutes = require('./routes/authRoutes');
 app.use('/api/auth',authRoutes)
