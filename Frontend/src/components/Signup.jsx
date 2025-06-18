@@ -9,6 +9,8 @@ const Signup = () => {
   const [email,setEmail] = useState(" ");
   const [password,setPassword] = useState(" ");
   const [errors, setErrors] = useState({});
+  const [image,setImage] = useState(null)
+  const [imagePreview,setImagePreview] = useState(null)
 
   const navigate = useNavigate()
 
@@ -37,7 +39,8 @@ const Signup = () => {
               {
                 name:name,
                 email:email,
-                password:password
+                password:password,
+                image:image
               }
             )
             console.log("response",response.data)
@@ -49,26 +52,48 @@ const Signup = () => {
           console.log(error)
         }
   }
+
+  const handleFilechange = (e)=>{
+    const file = e.target.files[0]
+    if (file) {
+      setImage(file)
+      const imageUrl = URL.createObjectURL(file);
+      setImagePreview(imageUrl) 
+    }
+  }
   
 
   return (
     <div className='bg-gradient-to-r from-emerald-300 to-cyan-300 ... h-screen pt-14'>
-      <div className='border-2 w-3/12 mx-auto border-slate-400 px-4 py-12 rounded-lg bg-slate-100'>
-        <h1 className='text-4xl text-center font-bold text-black pb-4ss'>Sign up</h1>
+      <div className='border-2 w-3/12 mx-auto border-slate-400 px-4 py-6 rounded-lg bg-slate-100'>
+        <h1 className='text-4xl text-center font-bold text-black '>Sign up</h1>
 
         <form onSubmit={SubmitHandler}>
           <div className='mt-4'>
+          <div>
+            <div className=' flex-col items-center justify-center'>
+              <div className='border-2 w-4/12 h-28'>
+                  {
+                    imagePreview && <img src={imagePreview} alt="" className='h-full w-full'/>
+                  }
+              </div>
+                <label className="cursor-pointer text-blue-600">
+                  Upload Image
+                  <input type="file" className='hidden' onChange={handleFilechange}/>
+                </label>
+            </div>
+          </div>
             <div className='mt-4'>
-            <TextField id="outlined-basic" label="Name" variant="outlined" className='w-full' onChange={(e)=>{setName(e.target.value)}}/>
-            {errors.name && <span style={{ color: 'red' }}>{errors.name}</span>}
+              <TextField id="outlined-basic" label="Name" variant="outlined" className='w-full' onChange={(e)=>{setName(e.target.value)}}/>
+              {errors.name && <span style={{ color: 'red' }}>{errors.name}</span>}
             </div>
             <div className='mt-4'>
-            <TextField id="outlined-basic" label="Email" variant="outlined" className='w-full' onChange={(e)=>{setEmail(e.target.value)}}/>
-            {errors.email && <span style={{ color: 'red' }}>{errors.email}</span>}
+              <TextField id="outlined-basic" label="Email" variant="outlined" className='w-full' onChange={(e)=>{setEmail(e.target.value)}}/>
+              {errors.email && <span style={{ color: 'red' }}>{errors.email}</span>}
             </div>
             <div className='mt-4'>
-            <TextField id="outlined-basic" label="Password" variant="outlined" className='w-full' onChange={(e)=>{setPassword(e.target.value)}}/>
-            {errors.password && <span style={{ color: 'red' }}>{errors.password}</span>}
+              <TextField id="outlined-basic" label="Password" variant="outlined" className='w-full' onChange={(e)=>{setPassword(e.target.value)}}/>
+              {errors.password && <span style={{ color: 'red' }}>{errors.password}</span>}
             </div>
           </div>
           <div className='mt-6 text-center '>
