@@ -35,13 +35,22 @@ const Signup = () => {
         e.preventDefault()
         try{
           if(validateForm()){
-            const response = await axios.post(`http://localhost:3000/api/auth/signup`,
-              {
-                name:name,
-                email:email,
-                password:password,
-                image:image
-              }
+            const formdata = new FormData()
+            formdata.append('name',name)
+            formdata.append('email',email)
+            formdata.append('password',password)
+            formdata.append('image',image)
+            const response = await axios.post(`http://localhost:3000/api/auth/signup`,formdata,{
+              headers: {
+                    'Content-Type': 'multipart/form-data'
+                  }
+            }
+              // {
+              //   name:name,
+              //   email:email,
+              //   password:password,
+              //   image:image
+              // }
             )
             console.log("response",response.data)
             navigate('/confirm-otp')

@@ -34,7 +34,15 @@ const Login = () => {
     try{
       if(validateInput()){
         const response = await axios.post(`http://localhost:3000/api/auth/login`,data)
-        console.log(response)
+        console.log(response.data)
+
+        const {existingUser,token} = response.data
+        localStorage.setItem("token",token)
+        localStorage.setItem('user',JSON.stringify({
+          name: existingUser.name,
+          email: existingUser.email,
+          image: existingUser.image
+        }))
         navigate('/header-sidebar/home')
       }
       // console.log(data)

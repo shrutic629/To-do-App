@@ -21,6 +21,7 @@ module.exports = (req,res,next)=>{
         req.user = {
             id: decoded.id,
             name: decoded.name,
+            image: decoded.image,
         }
 
         next()

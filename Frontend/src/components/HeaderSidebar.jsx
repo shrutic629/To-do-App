@@ -3,14 +3,21 @@ import { Outlet } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
 const HeaderSidebar = () => {
+
+    const user = JSON.parse(localStorage.getItem("user"))
+    console.log(user)
+
+    
   return (
     <div>
         <div className='min-h-screen flex flex-col '>
             <div className='border-2 px-9 py-6 flex items-center bg-gradient-to-r from-emerald-300 to-cyan-300 ...'>
                 <div className=' w-2/4 text-3xl font-bold'>To-do App</div>
                 <div className=' w-2/4 flex place-content-end'>
-                    <div className='h-10 w-10 border-2 rounded-3xl'></div>
-                    <h1 className='text-lg pl-3'>Rajdeep</h1>
+                    <div className='h-10 w-10 border-2 rounded-3xl'>
+                        <img src={user.image} alt="" className='rounded-3xl h-full w-full'/>
+                    </div>
+                    <h1 className='text-lg pl-3'>{user.name}</h1>
                 </div>
             </div>
             

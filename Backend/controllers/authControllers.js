@@ -117,7 +117,7 @@ exports.Login = async(req,res,next)=>{
             return res.status(400).json({message:'Password is incorrect'})
         }
 
-        const token = jwt.sign({id:existingUser._id,name:existingUser.name},process.env.SECRET,{expiresIn:'1h'})
+        const token = jwt.sign({id:existingUser._id,name:existingUser.name,image:existingUser.image},process.env.SECRET,{expiresIn:'1h'})
 
         res.status(200).json({message:'Login successful',token,existingUser})
         }
