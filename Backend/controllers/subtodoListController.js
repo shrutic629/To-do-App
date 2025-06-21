@@ -23,6 +23,8 @@ exports.CreateSubList = async(req,res,next)=>{
         next(err)
     }
 }
+  
+  
 
 exports.GetSingleSubList = async(req,res,next)=>{
     try{
@@ -56,6 +58,7 @@ exports.GetAllSubLists = async(req,res,next)=>{
         next(err)
     }
 }
+
 
 exports.DeleteSubList = async(req,res,next)=>{
     try{
@@ -92,3 +95,5 @@ exports.UpdateSubList = async(req,res,next)=>{
         next(err)
     }
 }
+
+  

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import axios from 'axios'
-import { useParams } from 'react-router-dom';
+import { useParams,useLocation } from 'react-router-dom';
 
 
 const SubListPage = () => {
@@ -10,6 +10,10 @@ const SubListPage = () => {
   const [showlist,setShowlist] = useState([])
 
   const { todoListid } = useParams()
+
+  const location = useLocation()
+  const listname = location.state?.name
+
 
   // ✅ Only focus if the last line is empty (i.e., just added)
   useEffect(() => {
@@ -55,7 +59,7 @@ const SubListPage = () => {
 
   return (
     <div className='w-[97%] mx-auto mt-9'>
-        <h1 className='mb-7 text-2xl font-semibold'>Shopping List</h1>
+        <h1 className='mb-7 text-2xl font-semibold'>{listname}</h1>
         {
             showlist.length > 0 ? (showlist.map((singlelist,index)=>{
                 return(

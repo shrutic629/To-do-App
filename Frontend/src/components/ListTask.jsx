@@ -113,7 +113,7 @@ const ListTask = () => {
                                 <h3>{list.title}</h3>
                             </div>
                             <div>
-                                <Link to={`/header-sidebar/sub-list/${list._id}`}>
+                                <Link to={`/header-sidebar/sub-list/${list._id}`} state={{name:list.title}} >
                                     <ArrowLongRightIcon className="w-6 h-6 text-blue-500" />
                                 </Link>
                             </div>
